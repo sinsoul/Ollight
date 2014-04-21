@@ -289,6 +289,10 @@ BOOL WINAPI NewExtTextOutW( HDC hdc, int x, int y, UINT options, CONST RECT * lp
 	DWORD dwThreadIdWithPoint = 0;
 	DWORD dwThreadIdCurr = 0;
 
+	if (!g_AllowFind)
+	{
+		return OrgExtTextOutW(hdc, x, y, options, lprect, lpString, c, lpDx);
+	}
 	pt.x = g_CurMousePos.x;
 	pt.y = g_CurMousePos.y;
 	
