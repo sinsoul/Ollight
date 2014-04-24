@@ -140,7 +140,7 @@ void GetStringRectW(HDC hDC, LPCWSTR lpWideCharStr, UINT cbWideChars, int x, int
 	lpStringRect->right  = lpStringRect->right  + WndPos.x;
 }
 
-#define  AsmCount 152
+#define  AsmCount 160
 
 wchar_t g_AsmComand[AsmCount+1][25] = {
 	L"MOV",L"MOVSX",L"MOVZX",L"PUSH",L"POP",L"PUSHA",L"POPA",L"PUSHAD",L"POPAD",L"EAX",L"EBX",L"ECX",L"EDX",L"ESP",L"EBP",L"ESI",L"EDI",L"ST",L"XMM"
@@ -150,7 +150,8 @@ wchar_t g_AsmComand[AsmCount+1][25] = {
 	L"AL",L"AX",L"MOVS",L"SCAS",L"LODS",L"STOS",L"REP",L"REPE",L"REPZ",L"REPNE",L"REPNZ",L"REPC",L"REPNC",L"JMP",L"CALL",L"RET",L"RETF",L"JAE",L"JA",
 	L"JNB",L"JB",L"JNAE",L"JBE",L"JNA",L"JG",L"JNLE",L"JGE",L"JNL",L"JL",L"JNGE",L"JLE",L"JNG",L"JE",L"JZ",L"JNE",L"JNZ",L"JC",L"JNC",L"JNO",L"JNP",
 	L"JPO",L"JNS",L"JO",L"JP",L"JPE",L"JS",L"LOOP",L"LOOPE",L"LOOPZ",L"LOOPNE",L"LOOPNZ",L"JCXZ",L"JECXZ",L"INT",L"IRET",L"HLT",L"WAIT",
-	L"ESC",L"LOCK",L"NOP",L"STC",L"CLC",L"CMC",L"STD",L"CLD",L"STI",L"CLI",L"DW",L"PROC",L"ENDP",L"SEGMENT",L"ASSUME",L"ENDS",L"END",L"NEG"
+	L"ESC",L"LOCK",L"NOP",L"STC",L"CLC",L"CMC",L"STD",L"CLD",L"STI",L"CLI",L"DW",L"PROC",L"ENDP",L"SEGMENT",L"ASSUME",L"ENDS",L"END",L"NEG",
+	L"FCHS", L"FLD", L"FCOMP", L"FXCH", L"F2XM1", L"FRNDINT", L"FILD", L"FYL2X" 
 };
 
 BOOL IsAsmInstruction(wchar_t *pwContent, int iContentSize)
