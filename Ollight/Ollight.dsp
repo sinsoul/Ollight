@@ -88,10 +88,42 @@ LINK32=link.exe
 # Begin Group "Source Files"
 
 # PROP Default_Filter "cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
+# Begin Source File
+
+SOURCE=.\detours\creatwth.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\detours\detours.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\detours\disasm.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\detours\image.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\detours\modules.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Ollight.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Ollight.rc
+# End Source File
 # End Group
 # Begin Group "Header Files"
 
 # PROP Default_Filter "h;hpp;hxx;hm;inl"
+# Begin Source File
+
+SOURCE=.\resource.h
+# End Source File
 # End Group
 # Begin Group "Resource Files"
 
