@@ -224,16 +224,16 @@ DWORD GetCurMousePosWordW(HDC hDC, LPCWSTR lpWideCharStr, INT cbWideChars, int x
 
 	DWORD dwResult = NO_CURMOUSEWORD;
 
-	//è®¡ç®—å½“å‰ç»˜åˆ¶æ–‡å­—çš„çŸ©å½¢åŒºåŸŸ
+	//¼ÆËãµ±Ç°»æÖÆÎÄ×ÖµÄ¾ØĞÎÇøÓò
 	GetStringRectW(hDC, lpWideCharStr, cbWideChars, x, y, &StringRect, lpDx);
 
-	//å½“å‰ç»˜åˆ¶æ–‡ä»¶çš„æœ€åº•éƒ¨åæ ‡é«˜äºé¼ æ ‡æ‰€åœ¨è¡Œï¼Œè·³è¿‡
+	//µ±Ç°»æÖÆÎÄ¼şµÄ×îµ×²¿×ø±ê¸ßÓÚÊó±êËùÔÚĞĞ£¬Ìø¹ı
 	if (StringRect.bottom < g_CurMousePos.y)
 	{
 		return dwResult;
 	}
 
-	//ç»˜åˆ¶çš„æ–‡å­—å·²ç»è¶Šè¿‡äº†é¼ æ ‡æ‰€åœ¨è¡Œï¼Œé¼ æ ‡ç‚¹å‡»äº†ç©ºç™½åŒºåŸŸä¼šå‡ºç°æ­¤ç§æƒ…å†µï¼Œåœæ­¢æœå¯»å¹¶å–æ¶ˆé«˜äº®
+	//»æÖÆµÄÎÄ×ÖÒÑ¾­Ô½¹ıÁËÊó±êËùÔÚĞĞ£¬Êó±êµã»÷ÁË¿Õ°×ÇøÓò»á³öÏÖ´ËÖÖÇé¿ö£¬Í£Ö¹ËÑÑ°²¢È¡Ïû¸ßÁÁ
 	if (g_CurMousePos.y < y)
 	{
 		_tcsncpy_s(g_HighLigthWord, 1024, L"", 1);
@@ -241,7 +241,7 @@ DWORD GetCurMousePosWordW(HDC hDC, LPCWSTR lpWideCharStr, INT cbWideChars, int x
 		return dwResult;
 	}
 
-	//å·²ç»ç¡®å®šé¼ æ ‡æ‰€æŒ‡å‘çš„æ–‡å­—è¡Œï¼Œé€å­—è®¡ç®—æ‰€æŒ‡å‘çš„æ˜¯å“ªä¸ªå­—
+	//ÒÑ¾­È·¶¨Êó±êËùÖ¸ÏòµÄÎÄ×ÖĞĞ£¬Öğ×Ö¼ÆËãËùÖ¸ÏòµÄÊÇÄÄ¸ö×Ö
 	nPrevWord = -1;
 	nCurrentWord = 0;
 	for(nCurrentWord = 0; nCurrentWord < cbWideChars; nCurrentWord++)
@@ -252,7 +252,7 @@ DWORD GetCurMousePosWordW(HDC hDC, LPCWSTR lpWideCharStr, INT cbWideChars, int x
 			int iLeftEdge = 0;
 			int iRightEdge = 0;
 
-			//å¯»æ‰¾è¯çš„å·¦è¾¹ç•Œ
+			//Ñ°ÕÒ´ÊµÄ×ó±ß½ç
 			for(iLeftEdge = nCurrentWord; iLeftEdge >=0; iLeftEdge--)
 			{
 				if (!IsParterOfWord(*(lpWideCharStr + iLeftEdge)))
@@ -262,7 +262,7 @@ DWORD GetCurMousePosWordW(HDC hDC, LPCWSTR lpWideCharStr, INT cbWideChars, int x
 				}
 			}
 
-			//å¯»æ‰¾è¯çš„å³è¾¹ç•Œ
+			//Ñ°ÕÒ´ÊµÄÓÒ±ß½ç
 			for (iRightEdge = nCurrentWord; iRightEdge <= cbWideChars; iRightEdge++)
 			{
 				if (!IsParterOfWord(*(lpWideCharStr + iRightEdge)))
@@ -313,7 +313,7 @@ BOOL WINAPI NewExtTextOutW( HDC hdc, int x, int y, UINT options, CONST RECT * lp
 		return OrgExtTextOutW(hdc, x, y, options, lprect, lpString, c, lpDx);
 	}
 
-	//ä»ä¸Šä¸€æ ˆå¸§è·å–çœŸå®çš„Yåæ ‡
+	//´ÓÉÏÒ»Õ»Ö¡»ñÈ¡ÕæÊµµÄY×ø±ê
 	DWORD dwRealY = 0;
 	__asm
 	{
@@ -414,28 +414,28 @@ void __cdecl DrawColor(char *pbColor, wchar_t *pwCode)
 		return;
 	}
 	
-	//æ˜¯å¦åŒ…å«è¦é«˜äº®çš„å­—ç¬¦ä¸²
+	//ÊÇ·ñ°üº¬Òª¸ßÁÁµÄ×Ö·û´®
 	for (;pwcStart != NULL; 
 		 pwcStart = _tcsstr(pwcStart, g_HighLigthWord))
 	{
 		iStart = pwcStart - wTempCode;
 		iEnd = iStart + iHighLigthLen;
 
-		//æ‰€åŒ¹é…å­—ç¬¦çš„å‰ä¸€ä¸ªå­—ç¬¦ä¸æœ«å°¾åä¸€ä¸ªå­—ç¬¦éƒ½åº”è¯¥ä¸å±äºè¯ç»„çš„ä¸€éƒ¨åˆ†ï¼Œå¦åˆ™é«˜äº® AL å¯„å­˜å™¨ï¼Œä¼šè¯¥æŠŠ CALLä¸­çš„ALä¹Ÿé«˜äº®
+		//ËùÆ¥Åä×Ö·ûµÄÇ°Ò»¸ö×Ö·ûÓëÄ©Î²ºóÒ»¸ö×Ö·û¶¼Ó¦¸Ã²»ÊôÓÚ´Ê×éµÄÒ»²¿·Ö£¬·ñÔò¸ßÁÁ AL ¼Ä´æÆ÷£¬»á¸Ã°Ñ CALLÖĞµÄALÒ²¸ßÁÁ
 		if (iStart > 0 && IsParterOfWord(*(wTempCode + (iStart - 1))))
 		{
 			pwcStart += iHighLigthLen;
 			continue;
 		}
 
-		//å³è¾¹ç•Œä¸å±äºè¯ç»„
+		//ÓÒ±ß½ç²»ÊôÓÚ´Ê×é
 		if (iEnd < iCodeLen && IsParterOfWord(*(wTempCode + iEnd)))
 		{
 			pwcStart += iHighLigthLen;
 			continue;
 		}
 
-		//ä¿®æ”¹ç€è‰²
+		//ĞŞ¸Ä×ÅÉ«
 		for (; iStart < iEnd; ++iStart)
 		{
 			pbColor[iStart] = g_Color[g_dwOllightColor];
@@ -453,7 +453,7 @@ _declspec(naked) void __cdecl ExtendDrawFunc()
 		JNE NOCOLOR
 		MOV ECX,DWORD PTR SS:[EBP+0x14]
 		MOV EAX,DWORD PTR DS:[ECX+0x10]
-		CMP EAX,0x006D0073			//åˆ¤æ–­å½“å‰çª—å£æ ‡é¢˜æ˜¯å¦ä¸º CPU Disasmï¼Œåªæ¯”è¾ƒäº†sm
+		CMP EAX,0x006D0073			//ÅĞ¶Ïµ±Ç°´°¿Ú±êÌâÊÇ·ñÎª CPU Disasm£¬Ö»±È½ÏÁËsm
 		JNE NOCOLOR
 		MOV ECX,DWORD PTR SS:[EBP+0x8] //Code
 		PUSH ECX
