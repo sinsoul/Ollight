@@ -15,6 +15,8 @@
 #else
 #endif // _UNICODE
 
+#define wcscat_s StringCchCatW
+
 #define __debugbreak() DebugBreak()
 
 #endif // _MSC_VER < 1200
