@@ -16,6 +16,7 @@
 #endif // _UNICODE
 
 #define wcscat_s StringCchCatW
+#define swprintf_s StringCchPrintfW
 
 #define __debugbreak() DebugBreak()
 
