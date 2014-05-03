@@ -10,6 +10,7 @@
 #define STRSAFE_NO_DEPRECATE
 #include "strsafe.h"
 #define strcpy_s StringCchCopyA
+#define strcat_s StringCchCatA
 #else
 #endif // _UNICODE
 
