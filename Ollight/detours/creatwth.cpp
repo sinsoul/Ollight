@@ -17,6 +17,8 @@ typedef DWORD DWORD_PTR;
 #include <strsafe.h>
 #endif
 
+#include "../config.h"
+
 // #define DETOUR_DEBUG 1
 // #define IGNORE_CHECKSUMS 1
 #define DETOURS_INTERNAL

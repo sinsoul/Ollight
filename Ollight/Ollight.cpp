@@ -2,6 +2,7 @@
 #include <tchar.h>
 #include <string.h>
 #include <stdio.h>
+#include "config.h"
 #include "detours/detours.h"
 #include "./od_pdk/plugin.h"
 #include "resource.h"
