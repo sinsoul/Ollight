@@ -17,6 +17,7 @@
 
 #define wcscat_s StringCchCatW
 #define swprintf_s StringCchPrintfW
+#define wcscpy_s StringCchCopyW
 
 #define __debugbreak() DebugBreak()
 
