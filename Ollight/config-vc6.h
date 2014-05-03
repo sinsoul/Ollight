@@ -4,7 +4,7 @@
 
 #if _MSC_VER < 1300
 
-
+#define __debugbreak() DebugBreak()
 
 #endif // _MSC_VER < 1200
 
