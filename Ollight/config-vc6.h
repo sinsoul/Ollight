@@ -11,6 +11,7 @@
 #include "strsafe.h"
 #define strcpy_s StringCchCopyA
 #define strcat_s StringCchCatA
+#define sprintf_s StringCchPrintfA
 #else
 #endif // _UNICODE
 
