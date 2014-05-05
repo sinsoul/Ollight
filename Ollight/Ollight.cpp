@@ -32,7 +32,7 @@ wchar_t g_HighLigthWord[1024] = {0};
 #define NO_CURMOUSEWORD   0
 
 #define PLUGINNAME			L"Ollight"
-#define VERSION				L"0.0.1"
+#define VERSION				L"0.0.2"
 #define SETCOLOR			L"Ollight Setting"
 #define OD_VIEW_CPU			2206
 
@@ -159,6 +159,9 @@ BOOL IsAsmInstruction(wchar_t *pwContent, int iContentSize)
 	wchar_t wContentCopy[256] = {0};
 	_tcsncpy_s(wContentCopy, 256, pwContent, iContentSize);
 	ZeroMemory(wContentCopy + iContentSize, 256 - iContentSize);
+
+	_tcsupr_s(wContentCopy,  _tcslen(wContentCopy) + 1);
+
 	for(int i = 0;i < AsmCount ; i++)
 	{
 		if (_tcsstr(wContentCopy, g_AsmComand[i]) != NULL)
@@ -271,11 +274,13 @@ DWORD GetCurMousePosWordW(HDC hDC, LPCWSTR lpWideCharStr, INT cbWideChars, int x
 			{
 				iLeftEdge = 0;
 			}
+			
 			_tcsncpy_s(g_HighLigthWord, 1024, lpWideCharStr + iLeftEdge, iRightEdge - iLeftEdge);
+			_tcsupr_s(g_HighLigthWord,  _tcslen(g_HighLigthWord) + 1);
 			g_AllowFind = FALSE;
-			// wchar_t OutputStrTest[1024] = L"";
-			// wsprintf(OutputStrTest,L"FIND:%s - L:%d, R:%d, X:%d, Y:%d, MX:%d, MY:%d\n",g_HighLigthWord,iLeftEdge,iRightEdge,x,y,g_CurMousePos.x,g_CurMousePos.y);
-			// OutputDebugString(OutputStrTest);	
+			 wchar_t OutputStrTest[1024] = L"";
+			 wsprintf(OutputStrTest,L"FIND:%s - L:%d, R:%d, X:%d, Y:%d, MX:%d, MY:%d\n",g_HighLigthWord,iLeftEdge,iRightEdge,x,y,g_CurMousePos.x,g_CurMousePos.y);
+			 OutputDebugString(OutputStrTest);	
 			break;
 		}
 	}
@@ -398,29 +403,33 @@ void __cdecl DrawColor(char *pbColor, wchar_t *pwCode)
 {
 	int iStart = 0;
 	int iEnd = 0;
+	wchar_t wTempCode[512] = {0};
 	int iCodeLen = _tcslen(pwCode);
+	_tcsncpy_s(wTempCode, 512, pwCode, iCodeLen);
+	_tcsupr_s(wTempCode,  iCodeLen + 1);
 	int iHighLigthLen = _tcslen(g_HighLigthWord);
-	wchar_t *pwcStart = _tcsstr(pwCode, g_HighLigthWord);
+	wchar_t *pwcStart = _tcsstr(wTempCode, g_HighLigthWord);
 	if (iCodeLen < 1 || pwcStart == NULL || iHighLigthLen == 0)
 	{
 		return;
 	}
+	
 	//是否包含要高亮的字符串
 	for (;pwcStart != NULL; 
 		 pwcStart = _tcsstr(pwcStart, g_HighLigthWord))
 	{
-		iStart = pwcStart - pwCode;
+		iStart = pwcStart - wTempCode;
 		iEnd = iStart + iHighLigthLen;
 
 		//所匹配字符的前一个字符与末尾后一个字符都应该不属于词组的一部分，否则高亮 AL 寄存器，会该把 CALL中的AL也高亮
-		if (iStart > 0 && IsParterOfWord(*(pwCode + (iStart - 1))))
+		if (iStart > 0 && IsParterOfWord(*(wTempCode + (iStart - 1))))
 		{
 			pwcStart += iHighLigthLen;
 			continue;
 		}
 
 		//右边界不属于词组
-		if (iEnd < iCodeLen && IsParterOfWord(*(pwCode + iEnd)))
+		if (iEnd < iCodeLen && IsParterOfWord(*(wTempCode + iEnd)))
 		{
 			pwcStart += iHighLigthLen;
 			continue;
