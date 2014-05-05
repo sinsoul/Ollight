@@ -278,9 +278,9 @@ DWORD GetCurMousePosWordW(HDC hDC, LPCWSTR lpWideCharStr, INT cbWideChars, int x
 			_tcsncpy_s(g_HighLigthWord, 1024, lpWideCharStr + iLeftEdge, iRightEdge - iLeftEdge);
 			_tcsupr_s(g_HighLigthWord,  _tcslen(g_HighLigthWord) + 1);
 			g_AllowFind = FALSE;
-			 wchar_t OutputStrTest[1024] = L"";
-			 wsprintf(OutputStrTest,L"FIND:%s - L:%d, R:%d, X:%d, Y:%d, MX:%d, MY:%d\n",g_HighLigthWord,iLeftEdge,iRightEdge,x,y,g_CurMousePos.x,g_CurMousePos.y);
-			 OutputDebugString(OutputStrTest);	
+// 			wchar_t OutputStrTest[1024] = L"";
+// 			wsprintf(OutputStrTest,L"FIND:%s - L:%d, R:%d, X:%d, Y:%d, MX:%d, MY:%d\n",g_HighLigthWord,iLeftEdge,iRightEdge,x,y,g_CurMousePos.x,g_CurMousePos.y);
+// 			OutputDebugString(OutputStrTest);	
 			break;
 		}
 	}
