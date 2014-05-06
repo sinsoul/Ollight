@@ -16,6 +16,13 @@
 #define DETOURS_X86 1
 #define DETOURS_32BIT 1
 
+// auto detect availability of PlatformSDK
+#include <windows.h>
+#ifdef GetWindowLongPtr
+#  define HAVE_PLATFORM_SDK 1
+#else
+#  define HAVE_PLATFORM_SDK 0
+#endif
 //////////////////////////////////////////////////////////////////////////////
 //
 
@@ -449,7 +456,7 @@ VOID CALLBACK DetourFinishHelperProcess(HWND, HINSTANCE, LPSTR, INT);
 
 //////////////////////////////////////////////////////////////////////////////
 //
-#if (_MSC_VER < 1299)
+#if (_MSC_VER < 1299 && !HAVE_PLATFORM_SDK)
 #include <imagehlp.h>
 typedef IMAGEHLP_MODULE IMAGEHLP_MODULE64;
 typedef PIMAGEHLP_MODULE PIMAGEHLP_MODULE64;

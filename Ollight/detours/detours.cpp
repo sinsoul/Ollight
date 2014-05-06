@@ -15,6 +15,7 @@
 //#define DETOUR_DEBUG 1
 #define DETOURS_INTERNAL
 
+#include "../config.h"
 #include "detours.h"
 
 #if defined(DETOURS_X86)
