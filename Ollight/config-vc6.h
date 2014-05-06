@@ -98,6 +98,50 @@ int _tcsncpy_s(charT* dst, size_t size, const charT* src, size_t count)
     return 0;
 }
 
+inline int _tcsupr_s(char* str, size_t len)
+{
+  char* ptr = str;
+  if(!str || !len)
+  {
+    errno = EINVAL;
+    return EINVAL;
+  }
+
+  while(len--)
+  {
+    if(!*ptr)
+      return 0;
+    *ptr = toupper(*ptr);
+    ptr++;
+  }
+
+  *str = '\0';
+  errno = EINVAL;
+  return EINVAL;
+}
+
+inline int _tcsupr_s(wchar_t* str, size_t len)
+{
+  wchar_t* ptr = str;
+  if(!str || !len)
+  {
+    errno = EINVAL;
+    return EINVAL;
+  }
+
+  while(len--)
+  {
+    if(!*ptr)
+      return 0;
+    *ptr = towupper(*ptr);
+    ptr++;
+  }
+
+  *str = '\0';
+  errno = EINVAL;
+  return EINVAL;
+}
+
 #endif // _MSC_VER < 1200
 
 #endif // _CONFIG_VC6_H_
